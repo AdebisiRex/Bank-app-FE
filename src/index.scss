@@ -1,0 +1,90 @@
+// $theme-colors: (
+//   "info":    #032870,
+//   "primary":  #fe7005,
+//   "dark": black
+// );
+
+$font-family-sans-serif: "Poppins", sans-serif;
+$font-weight-light: 100;
+$primary: #fe7005;
+$info: #032870;
+$success: #b3d336;
+$dark: black;
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+.fw-lights {
+  font-weight: 200;
+}
+.carousel-1 {
+  background: linear-gradient(
+      90deg,
+      rgb(255, 255, 255),
+      rgba(255, 255, 255, 0.4),
+      rgba(0, 0, 0, 0)
+    ),
+    url("/src/resources/boy.jpg");
+  background-position: bottom;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.carousel-2 {
+  background: linear-gradient(
+      90deg,
+      rgb(0, 0, 0),
+      rgba(0, 0, 0, 0.6),
+      rgba(0, 0, 0, 0)
+    ),
+    url("/src/resources/old.jpg");
+  background-position: bottom;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.carousel-3 {
+  background: linear-gradient(
+      90deg,
+      rgb(255, 255, 255),
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0)
+    ),
+    url("/src/resources/personal.jpg");
+  background-position: bottom;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.carousel-4 {
+  background: linear-gradient(
+      90deg,
+      rgb(0, 0, 0),
+      rgba(0, 0, 0, 0.6),
+      rgba(0, 0, 0, 0)
+    ),
+    url("/src/resources/current.jpg");
+  background-position: bottom;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.carousel-5 {
+  background: linear-gradient(
+      90deg,
+      rgb(255, 255, 255),
+      rgba(0, 0, 0, 0.6),
+      rgba(0, 0, 0, 0)
+    ),
+    url("/src/resources/stop-fraud-slider.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.signupform {
+  background: linear-gradient(
+      90deg,
+      rgb(0, 0, 0, 0.6),
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0.6)
+    ),
+    url("/src/resources/freedom.jpg");
+  background-position: bottom;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
