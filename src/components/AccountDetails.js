@@ -6,7 +6,7 @@ const AccountDetails = ({currentUser}) => {
     <>
       <div className="mb-3 p-3">
         <h3>
-          Account Details<i class="fa fa-info-circle" aria-hidden="true"></i>
+          Account Details<i className="fa fa-info-circle" aria-hidden="true"></i>
         </h3>
         <div className="d-md-flex d-block ">
             <div className="col-12 rounded-3 p-3 bg-light  col-md-6 ">

@@ -1,23 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import WallerAdd from "./WallerAdd";
 
 import Wallet from "./Wallet";
 
+const Wallets = ({ id }) => {
+  const [userWallets, setuserWallets] = useState("");
 
-
-const Wallets = () => {
+  const getWallets = () => {
+    console.log("loaded Successfully")
+  };
   return (
     <>
       <div className="mb-3 p-3 border rounded-4">
         <h3>
-          Wallets <i className="fa fa-plus-circle" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#walletModal"></i>
+          Wallets{" "}
+          <i
+            className="fa fa-plus-circle"
+            aria-hidden="true"
+            data-bs-toggle="modal"
+            data-bs-target="#walletModal"
+          ></i>
         </h3>
-        <WallerAdd/>
+        <WallerAdd id={id} />
 
         <div className="row g-3">
-          <Wallet/>
-          
-          
+          <Wallet />
         </div>
       </div>
     </>
