@@ -7,7 +7,7 @@ const MessagesPage = () => {
   return (
     <div>
       <>
-        <Navbar />
+        
         <div className="row">
           <DashboardNav />
 

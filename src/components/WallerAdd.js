@@ -1,35 +1,23 @@
 import React, { useState } from "react";
-import axios from "axios";
 
-const WallerAdd = ({ id }) => {
+
+const WallerAdd = ({ id, createWallet, message }) => {
   const [w_name, setw_name] = useState("");
   const [t_amount, sett_amount] = useState("");
   const [t_date, sett_date] = useState("");
-  const [message, setmessage] = useState("");
+  
 
-  const createWallet = () => {
-    let c_date = new Date().toLocaleDateString();
-    let w_balance = 0;
-    let uid = id;
-    let newWallet = { w_name, t_amount, t_date, w_balance, c_date, uid };
-
-    console.log(newWallet);
-
-    let endpoint = "http://localhost:2300/wallet/create";
-
-    axios.post(endpoint, newWallet).then((result) => {
-      setmessage(result.data.message);
-    }).catch((err)=>{
-        setmessage("There's been an unforseen error;"+err.message)
-    });
-  };
+  let c_date = new Date().toLocaleDateString();
+  let w_balance = 0;
+  let uid = localStorage.token;
+  let newWallet = { w_name, t_amount, t_date, w_balance, c_date, uid };
 
   return (
     <>
       <div
         className="modal fade"
         id="walletModal"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="walletModalLabel"
         aria-hidden="true"
       >
@@ -41,7 +29,7 @@ const WallerAdd = ({ id }) => {
               </h5>
             </div>
             <div className="modal-body">
-            {message !== "" ? (
+              {message !== "" ? (
                 <div className="alert alert-success" role="alert">
                   {message}
                 </div>
@@ -82,7 +70,7 @@ const WallerAdd = ({ id }) => {
                 Dismiss
               </button>
               <button
-                onClick={createWallet}
+                onClick={()=>createWallet(newWallet)}
                 type="button"
                 className="btn btn-primary"
               >

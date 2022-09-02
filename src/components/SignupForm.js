@@ -8,12 +8,12 @@ const SignupForm = () => {
   const [username, setusername] = useState("");
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
-  const [balance, setbalance] = useState(0);
+  // const [balance, setbalance] = useState(0);
   const [message, setmessage] = useState("");
   let navigate = useNavigate();
 
   const signup = () => {
-    let acc_no = Math.floor(Math.random() * 10e9);
+    let acc_no = Number("11"+Math.floor(Math.random() * 10e7));
     let newAccount = {
       firstname,
       lastname,
@@ -21,9 +21,10 @@ const SignupForm = () => {
       email,
       password,
       acc_no,
-      balance,
+      balance:0,
     };
-    let endpoint = "http://localhost:2300/user/signup";
+    let EP= process.env.REACT_APP_EP
+    let endpoint = EP+ "/user/signup";
     axios
       .post(endpoint, newAccount)
       .then((result) => {
@@ -52,7 +53,7 @@ const SignupForm = () => {
             <h1 className="text-primary fw-bolder text-center mb-3">
               Welcome, to freedom!!!
             </h1>
-            <h2 className="text-center text-secondary">Sign in</h2>
+            <h2 className="text-center text-secondary">Sign up</h2>
             <div className="col-9 mx-auto">
               {message !== "" ? (
                 <div className="alert alert-danger" role="alert">

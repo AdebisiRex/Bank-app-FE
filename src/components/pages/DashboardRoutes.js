@@ -1,20 +1,45 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
+
+import NavbarDash from "../NavbarDash";
 
 import DashboardPage from "./DashboardPage";
 import MessagesPage from "./MessagesPage";
 import TransactionPage from "./TransactionPage";
 import UsereditPage from "./UsereditPage";
 
+const DashboardRoutes = () => {
+  const token = localStorage.token;
+  const [message, setmessage] = useState("")
+  const [transactions, settransactions] = useState("")
 
-const DashboardRoutes = ({currentUser}) => {
+  const [currentUser, setcurrentUser] = useState("");
+  useEffect(() => {
+    let newObject = { _id: token };
+    let EP = process.env.REACT_APP_EP
+    let endpoint = EP+"/user/dashboard"
+    axios.post(endpoint,newObject).then((result)=>{
+      setcurrentUser(result.data[0])
+      // console.log(result)
+      // setmessage(result.data[0].message)
+    })
+    let transactionpoint = EP+"/user/getTransactions"
+    axios.post(transactionpoint, newObject).then((result)=>{
+      console.log(result.data)
+      let arr= result.data;
+      let new_arr = arr.reverse();
+      settransactions(new_arr)
+    })
+  }, []);
   return (
     <>
+    <NavbarDash currentUser={currentUser}/>
       <Routes>
-        <Route path="/" element={<DashboardPage currentUser={currentUser} />} />
-        <Route path="/transactions" element={<TransactionPage/>} />
-        <Route path="/messages" element={<MessagesPage/>} />
-        <Route path="/user" element={<UsereditPage/>} />
+        <Route path="/" element={<DashboardPage currentUser={currentUser} transactions={transactions} />} />
+        <Route path="/transactions" element={<TransactionPage transactions={transactions} />} />
+        <Route path="/messages" element={<MessagesPage />} />
+        <Route path="/user" element={<UsereditPage />} />
       </Routes>
     </>
   );

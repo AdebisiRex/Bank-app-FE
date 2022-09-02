@@ -1,7 +1,5 @@
 import React from "react";
 import DashboardNav from "../DashboardNav";
-import Navbar from "../Navbar";
-
 import Welcome from "../Welcome";
 import AccountDisplay from "../AccountDisplay";
 import Wallets from "../Wallets";
@@ -9,11 +7,11 @@ import AccountDetails from "../AccountDetails";
 import Transactions from "../Transactions";
 import OnlineTransaction from "../OnlineTransaction";
 
-const DashboardPage = ({currentUser}) => {
+const DashboardPage = ({currentUser, transactions}) => {
     let {firstname, lastname, email, _id,username,balance, acc_no}=currentUser;
   return (
     <>
-      <Navbar />
+      
       <div className="row">
         <DashboardNav />
         <div className="col-12 col-md-8 p-3">
@@ -22,7 +20,7 @@ const DashboardPage = ({currentUser}) => {
             <AccountDetails currentUser={currentUser} />
             <Wallets id={_id} />
             <AccountDisplay />
-            <Transactions />
+            <Transactions transactions={transactions} />
           </div>
         </div>
         <div className="col-3 p-3 d-none d-md-block ">

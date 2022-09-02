@@ -9,7 +9,7 @@ const AccountDisplay = () => {
             <div className="row mb-3">
               <div className="col-3  rounded-pill bg-info p-3">
                 <h3 className="text-white text-center m-0">
-                  <i class="fa fa-inbox" aria-hidden="true"></i>
+                  <i className="fa fa-inbox" aria-hidden="true"></i>
                 </h3>
               </div>
               <div className="col-9">
@@ -22,7 +22,7 @@ const AccountDisplay = () => {
             <div className="row mb-3">
               <div className="col-3 rounded-pill bg-primary p-3">
                 <h3 className="text-white text-center m-0">
-                  <i class="fa fa-send-o" aria-hidden="true"></i>
+                  <i className="fa fa-send-o" aria-hidden="true"></i>
                 </h3>
               </div>
               <div className="col-9">
@@ -35,7 +35,7 @@ const AccountDisplay = () => {
             <div className="row ">
               <div className="col-3 rounded-pill bg-success text-center p-3">
                 <h3 className="text-white   m-0">
-                  <i class="fa fa-book" aria-hidden="true"></i>
+                  <i className="fa fa-book" aria-hidden="true"></i>
                 </h3>
               </div>
               <div className="col-9">

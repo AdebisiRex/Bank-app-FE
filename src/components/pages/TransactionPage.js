@@ -1,18 +1,20 @@
 import React from "react";
 import DashboardNav from "../DashboardNav";
-import Navbar from "../Navbar";
+
 import Transactions from "../Transactions";
 
-const TransactionPage = () => {
+const TransactionPage = ({transactions}) => {
+  
   return (
     <>
-      <Navbar />
+      
       <div className="row">
         
           <DashboardNav />
         
         <div className="col-10">
-          <Transactions />
+          { }
+          <Transactions transactions={transactions} />
         </div>
       </div>
     </>

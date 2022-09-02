@@ -10,11 +10,16 @@ import axios from "axios";
 import { useState } from "react";
 
 const App = () => {
+  console.log(process.env.port)
   let navigate = useNavigate();
-  const [currentUser, setcurrentUser] = useState("");
+  
   const [message, setmessage] = useState("");
+  
+  let thisToken = localStorage.token;
+
   const signin = (thisUser) => {
-    let endpoint = "http://localhost:2300/user/signin";
+    let EP = process.env.REACT_APP_EP;
+    let endpoint = `${EP}/user/signin`;
 
     console.log(thisUser);
 
@@ -22,7 +27,9 @@ const App = () => {
       .post(endpoint, thisUser)
       .then((result) => {
         if (result.data.response) {
-          setcurrentUser(result.data.result);
+          localStorage.token= result.data.result._id;
+          // settoken(()=>localStorage.token)
+      
           navigate("/dashboard");
         } else {
           setmessage(result.data.message);
@@ -44,7 +51,7 @@ const App = () => {
         />
         <Route
           path="/dashboard/*"
-          element={<DashboardRoutes currentUser={currentUser} />}
+          element={thisToken===""?<Navigate to="/signup"/>:<DashboardRoutes/>}
         />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
