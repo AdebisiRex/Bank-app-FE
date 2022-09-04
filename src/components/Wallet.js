@@ -20,7 +20,7 @@ const Wallet = ({
   let id = localStorage.token;
   const fundWallets = () => {
     let EP = process.env.REACT_APP_EP
-    let endpoint = EP+"/wallet/fundWallet"
+    let endpoint = "https://bank-r.herokuapp.com/wallet/fundWallet"
     let fundObj = { walletID, id, amount };
     axios.post(endpoint, fundObj).then((result)=>{
       console.log(result)

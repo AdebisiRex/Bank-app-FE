@@ -19,7 +19,7 @@ const App = () => {
 
   const signin = (thisUser) => {
     let EP = process.env.REACT_APP_EP;
-    let endpoint = `${EP}/user/signin`;
+    let endpoint = `https://bank-r.herokuapp.com/user/signin`;
 
     console.log(thisUser);
 

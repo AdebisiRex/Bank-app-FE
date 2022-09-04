@@ -27,7 +27,7 @@ const FundAccount = ({currentUser}) => {
         text: "Pay Now",
         onSuccess: () =>{
           alert("Your Account Has been Funded with"+newAmount);
-          let endpoint = "http://localhost:2300/user/updateBalance";
+          let endpoint = "https://bank-r.herokuapp.com/user/updateBalance";
           let newObject = {balance: balance, id:currentUser._id,date,type:true, amount:newAmount, description:"Personal Funding"}
           axios.post(endpoint, newObject).then((result)=>{
             console.log(result)

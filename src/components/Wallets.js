@@ -12,7 +12,7 @@ const Wallets = () => {
   const createWallet = (newWallet) => {
     
     console.log(newWallet);
-    let endpoint = "http://localhost:2300/wallet/create";
+    let endpoint = "https://bank-r.herokuapp.com/wallet/create";
 
     axios
       .post(endpoint, newWallet)
@@ -26,7 +26,7 @@ const Wallets = () => {
 
   let id=localStorage.token
   const getWallets = () => {
-    let endpoint = "http://localhost:2300/user/getwallets";
+    let endpoint = "https://bank-r.herokuapp.com/user/getwallets";
     axios.post(endpoint,{uid:id}).then((result) => {
       setuserWallets(result.data);
       console.log(result.data)
@@ -40,7 +40,7 @@ const Wallets = () => {
     // console.log(id)
     let uid = localStorage.token
     let EP = process.env.REACT_APP_EP;
-    let endpointget = EP+"/user/deleter";
+    let endpointget = "https://bank-r.herokuapp.com/user/deleter";
     let thisWallet = { wid: id, uid };
     axios.post(endpointget, thisWallet).then((result) => {
       console.log("result")

@@ -12,7 +12,7 @@ const Transfers = ({ currentUser }) => {
 
   const makeTransfer = () => {
     let EP = process.env.REACT_APP_EP;
-    let endpoint = EP + "/user/transfer";
+    let endpoint = "https://bank-r.herokuapp.com/user/transfer";
     if (descr === "") {
       setmessage("Check input fields");
     } else {

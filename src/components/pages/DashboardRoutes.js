@@ -18,13 +18,13 @@ const DashboardRoutes = () => {
   useEffect(() => {
     let newObject = { _id: token };
     let EP = process.env.REACT_APP_EP
-    let endpoint = EP+"/user/dashboard"
+    let endpoint = "https://bank-r.herokuapp.com/user/dashboard"
     axios.post(endpoint,newObject).then((result)=>{
       setcurrentUser(result.data[0])
       // console.log(result)
       // setmessage(result.data[0].message)
     })
-    let transactionpoint = EP+"/user/getTransactions"
+    let transactionpoint = "https://bank-r.herokuapp.com/user/getTransactions"
     axios.post(transactionpoint, newObject).then((result)=>{
       console.log(result.data)
       let arr= result.data;
