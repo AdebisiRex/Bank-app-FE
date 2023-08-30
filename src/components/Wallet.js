@@ -22,10 +22,10 @@ const Wallet = ({
     let EP = process.env.REACT_APP_EP
     let endpoint = "https://bank-r.herokuapp.com/wallet/fundWallet"
     let fundObj = { walletID, id, amount };
-    axios.post(endpoint, fundObj).then((result)=>{
-      console.log(result)
-      setmessage(result.data.message)
-    })
+    axios.post("/wallet/fundWallet", fundObj).then((result) => {
+      console.log(result);
+      setmessage(result.data.message);
+    });
   };
   return (
     <>

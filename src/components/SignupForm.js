@@ -26,7 +26,7 @@ const SignupForm = () => {
     let EP= process.env.REACT_APP_EP
     let endpoint = "https://bank-r.herokuapp.com/user/signup";
     axios
-      .post(endpoint, newAccount)
+      .post("/user/signup", newAccount)
       .then((result) => {
         if (result.data.response) {
           

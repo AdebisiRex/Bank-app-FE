@@ -3,7 +3,6 @@ import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import Homepage from "./components/pages/Homepage";
 import SignupPage from "./components/pages/SignupPage";
 import SinginPage from "./components/pages/SinginPage";
-
 import DashboardRoutes from "./components/pages/DashboardRoutes";
 import ErrorPage from "./components/pages/ErrorPage";
 import axios from "axios";
@@ -19,17 +18,17 @@ const App = () => {
 
   const signin = (thisUser) => {
     let EP = process.env.REACT_APP_EP;
-    let endpoint = `https://bank-r.herokuapp.com/user/signin`;
+    // let endpoint = `https://bank-r.herokuapp.com/user/signin`;
 
     console.log(thisUser);
 
     axios
-      .post(endpoint, thisUser)
+      .post("/user/signin", thisUser)
       .then((result) => {
         if (result.data.response) {
-          localStorage.token= result.data.result._id;
+          localStorage.token = result.data.result._id;
           // settoken(()=>localStorage.token)
-      
+
           navigate("/dashboard");
         } else {
           setmessage(result.data.message);

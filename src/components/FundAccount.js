@@ -29,10 +29,9 @@ const FundAccount = ({currentUser}) => {
           alert("Your Account Has been Funded with"+newAmount);
           let endpoint = "https://bank-r.herokuapp.com/user/updateBalance";
           let newObject = {balance: balance, id:currentUser._id,date,type:true, amount:newAmount, description:"Personal Funding"}
-          axios.post(endpoint, newObject).then((result)=>{
-            console.log(result)
-
-          })
+          axios.post("/user/updateBalance", newObject).then((result) => {
+            console.log(result);
+          });
         },
         onClose: () => alert("Wait! You need this oil, don't go!!!!"),
       }

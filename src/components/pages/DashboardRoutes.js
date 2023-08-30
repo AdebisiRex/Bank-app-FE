@@ -19,18 +19,18 @@ const DashboardRoutes = () => {
     let newObject = { _id: token };
     let EP = process.env.REACT_APP_EP
     let endpoint = "https://bank-r.herokuapp.com/user/dashboard"
-    axios.post(endpoint,newObject).then((result)=>{
-      setcurrentUser(result.data[0])
+    axios.post("/user/dashboard", newObject).then((result) => {
+      setcurrentUser(result.data[0]);
       // console.log(result)
       // setmessage(result.data[0].message)
-    })
+    });
     let transactionpoint = "https://bank-r.herokuapp.com/user/getTransactions"
-    axios.post(transactionpoint, newObject).then((result)=>{
-      console.log(result.data)
-      let arr= result.data;
+    axios.post("/user/getTransactions", newObject).then((result) => {
+      console.log(result.data);
+      let arr = result.data;
       let new_arr = arr.reverse();
-      settransactions(new_arr)
-    })
+      settransactions(new_arr);
+    });
   }, []);
   return (
     <>

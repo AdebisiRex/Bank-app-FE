@@ -22,7 +22,7 @@ const Transfers = ({ currentUser }) => {
         let balance = Number(currentUser.balance) - Number(amount);
         let newTransfer = { accountNo, descr, date, id, type, amount, balance };
         axios
-          .post(endpoint, newTransfer)
+          .post("/user/transfer", newTransfer)
           .then((result) => {
             console.log({ result, rex: "y'all tripping" });
           })

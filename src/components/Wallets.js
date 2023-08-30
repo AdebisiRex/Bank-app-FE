@@ -15,7 +15,7 @@ const Wallets = () => {
     let endpoint = "https://bank-r.herokuapp.com/wallet/create";
 
     axios
-      .post(endpoint, newWallet)
+      .post("/wallet/create", newWallet)
       .then((result) => {
         setmessage(result.data.message);
       })
@@ -27,9 +27,9 @@ const Wallets = () => {
   let id=localStorage.token
   const getWallets = () => {
     let endpoint = "https://bank-r.herokuapp.com/user/getwallets";
-    axios.post(endpoint,{uid:id}).then((result) => {
+    axios.post("/user/getwallets", { uid: id }).then((result) => {
       setuserWallets(result.data);
-      console.log(result.data)
+      console.log(result.data);
     });
   };
   useEffect(()=>{
@@ -42,12 +42,15 @@ const Wallets = () => {
     let EP = process.env.REACT_APP_EP;
     let endpointget = "https://bank-r.herokuapp.com/user/deleter";
     let thisWallet = { wid: id, uid };
-    axios.post(endpointget, thisWallet).then((result) => {
-      console.log("result")
-      setmessage(result.data.message);
-    }).catch(()=>{
-      console.log("what????")
-    });
+    axios
+      .post("/user/deleter", thisWallet)
+      .then((result) => {
+        console.log("result");
+        setmessage(result.data.message);
+      })
+      .catch(() => {
+        console.log("what????");
+      });
   };
 
   
