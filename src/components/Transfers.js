@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+import { useAppDispatch } from "../redux/store";
 const Transfers = ({ currentUser }) => {
+  const dispatch = useAppDispatch();
   const [accountNo, setaccountNo] = useState("");
   const [amount, setamount] = useState("");
   const [descr, setdescr] = useState("");
@@ -11,8 +12,6 @@ const Transfers = ({ currentUser }) => {
   let type = false;
 
   const makeTransfer = () => {
-    let EP = process.env.REACT_APP_EP;
-    let endpoint = "https://bank-r.herokuapp.com/user/transfer";
     if (descr === "") {
       setmessage("Check input fields");
     } else {
@@ -21,14 +20,7 @@ const Transfers = ({ currentUser }) => {
       } else {
         let balance = Number(currentUser.balance) - Number(amount);
         let newTransfer = { accountNo, descr, date, id, type, amount, balance };
-        axios
-          .post("/user/transfer", newTransfer)
-          .then((result) => {
-            console.log({ result, rex: "y'all tripping" });
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        dispatch(makeTransfer(newTransfer));
       }
     }
   };

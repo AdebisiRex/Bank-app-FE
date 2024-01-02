@@ -1,44 +1,57 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useAppDispatch } from "../redux/store";
 import { PaystackButton } from "react-paystack";
+import { useNavigate } from "react-router-dom";
+import { getUserData, updateBalance } from "../redux/actions/user.action";
 
-const FundAccount = ({currentUser}) => {
-    const [newAmount, setnewAmount] = useState("");
+const FundAccount = ({ currentUser }) => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const [newAmount, setnewAmount] = useState("");
 
-    let email=currentUser.email;
-    let publicKey = 'pk_test_81338c74c32ab94adecbb258dc43be07f645286c';
-    let name = currentUser.firstname;
-    let amount =  (newAmount*100);
-    let balance = Number(currentUser.balance) + Number(newAmount);
-    let date = new Date().toLocaleDateString();
-    
-    
+  let email = currentUser.email;
+  let publicKey = "pk_test_81338c74c32ab94adecbb258dc43be07f645286c";
+  let name = currentUser.firstname;
+  let amount = newAmount * 100;
+  let balance = Number(currentUser.balance) + Number(newAmount);
+  let date = new Date().toLocaleDateString();
 
-   
-    // 
-    const componentProps = {
-        email,
-        amount,
-        metadata: {
-          name,
-          phone:"",
-        },
-        publicKey,
-        text: "Pay Now",
-        onSuccess: () =>{
-          alert("Your Account Has been Funded with"+newAmount);
-          let endpoint = "https://bank-r.herokuapp.com/user/updateBalance";
-          let newObject = {balance: balance, id:currentUser._id,date,type:true, amount:newAmount, description:"Personal Funding"}
-          axios.post("/user/updateBalance", newObject).then((result) => {
-            console.log(result);
-          });
-        },
-        onClose: () => alert("Wait! You need this oil, don't go!!!!"),
-      }
+  //
+  const componentProps = {
+    email,
+    amount,
+    metadata: {
+      name,
+      phone: "",
+    },
+    publicKey,
+    text: "Pay Now",
+    onSuccess: () => {
+      document.querySelector("button[data-bs-dismiss='modal']").click()
+      alert("Your Account Has been Funded with" + newAmount);
+      let newObject = {
+        balance: balance,
+        id: currentUser._id,
+        date,
+        type: true,
+        amount: newAmount,
+        description: "Personal Funding",
+      };
+
+      dispatch(updateBalance(newObject));
+
+      dispatch(getUserData({ _id: localStorage.token }));
+
+      // })()
+      // axios.post("/user/updateBalance", newObject).then((result) => {
+      //   console.log(result);
+      // });
+    },
+    onClose: () => alert("Your transaction will not be recorded"),
+  };
   return (
     <>
-      
-
       <div
         className="modal fade"
         id="FundAccount"
@@ -60,9 +73,14 @@ const FundAccount = ({currentUser}) => {
               ></button>
             </div>
             <div className="modal-body">
-                <input className="form-control" type="number" placeholder="Amount"
-                onChange={(e)=>{setnewAmount(e.target.value)}} />
-
+              <input
+                className="form-control"
+                type="number"
+                placeholder="Amount"
+                onChange={(e) => {
+                  setnewAmount(e.target.value);
+                }}
+              />
             </div>
             <div className="modal-footer">
               <button
@@ -72,7 +90,11 @@ const FundAccount = ({currentUser}) => {
               >
                 Quit
               </button>
-              <PaystackButton className="btn btn-success" {...componentProps} />
+              <PaystackButton
+                data-bs-dismiss="modal"
+                className="btn btn-success"
+                {...componentProps}
+              />
             </div>
           </div>
         </div>

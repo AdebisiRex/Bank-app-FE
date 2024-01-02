@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useAppDispatch } from "../redux/store";
+import { createAccount } from "../redux/actions/user.action";
 
 const SignupForm = () => {
+  const dispatch = useAppDispatch();
   const [firstname, setfirstname] = useState("");
   const [lastname, setlastname] = useState("");
   const [username, setusername] = useState("");
@@ -12,8 +14,8 @@ const SignupForm = () => {
   const [message, setmessage] = useState("");
   let navigate = useNavigate();
 
-  const signup = () => {
-    let acc_no = Number("11"+Math.floor(Math.random() * 10e7));
+  const signup = async () => {
+    let acc_no = Number("11" + Math.floor(Math.random() * 10e7));
     let newAccount = {
       firstname,
       lastname,
@@ -21,25 +23,13 @@ const SignupForm = () => {
       email,
       password,
       acc_no,
-      balance:0,
+      balance: 0,
     };
-    let EP= process.env.REACT_APP_EP
-    let endpoint = "https://bank-r.herokuapp.com/user/signup";
-    axios
-      .post("/user/signup", newAccount)
-      .then((result) => {
-        if (result.data.response) {
-          
-          setmessage(result.data.message);
-          navigate("/signin");
-        } else {
-          setmessage(result.data.message);
-        }
-      })
-      .catch((err) => {
-        // console.log(err);
-        setmessage(err);
-      });
+
+    const { payload } = await dispatch(createAccount(newAccount));
+    if (payload.response) {
+      navigate("/signin");
+    }
   };
 
   return (

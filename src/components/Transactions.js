@@ -23,6 +23,7 @@ const Transactions = ({ transactions }) => {
           {transactions ? (
             transactions.map((item, value) => (
               <TransactionEach
+                key={value}
                 type={item.type}
                 description={item.description}
                 accountNo={item.accountNo}

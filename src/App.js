@@ -7,36 +7,26 @@ import DashboardRoutes from "./components/pages/DashboardRoutes";
 import ErrorPage from "./components/pages/ErrorPage";
 import axios from "axios";
 import { useState } from "react";
+import { useAppDispatch } from "./redux/store";
+import { loginUser } from "./redux/actions/user.action";
 
 const App = () => {
-  console.log(process.env.port)
+  const dispatch = useAppDispatch();
   let navigate = useNavigate();
-  
+
   const [message, setmessage] = useState("");
-  
+
   let thisToken = localStorage.token;
 
-  const signin = (thisUser) => {
-    let EP = process.env.REACT_APP_EP;
-    // let endpoint = `https://bank-r.herokuapp.com/user/signin`;
+  const signin = async (thisUser) => {
+    const { payload } = await dispatch(loginUser(thisUser));
 
-    console.log(thisUser);
-
-    axios
-      .post("/user/signin", thisUser)
-      .then((result) => {
-        if (result.data.response) {
-          localStorage.token = result.data.result._id;
-          // settoken(()=>localStorage.token)
-
-          navigate("/dashboard");
-        } else {
-          setmessage(result.data.message);
-        }
-      })
-      .catch((err) => {
-        setmessage("Please attend to error:" + err.message);
-      });
+    if (payload.response) {
+      localStorage.token = payload.result._id;
+      navigate("/dashboard");
+    } else {
+      setmessage(payload?.data.message ?? "there was an error");
+    }
   };
   return (
     <>
@@ -50,7 +40,9 @@ const App = () => {
         />
         <Route
           path="/dashboard/*"
-          element={thisToken===""?<Navigate to="/signup"/>:<DashboardRoutes/>}
+          element={
+            thisToken === "" ? <Navigate to="/signup" /> : <DashboardRoutes />
+          }
         />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
